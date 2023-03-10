@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@font-face {
+    font-family: 'Akzidenz-Grotesk BQ';
+    src: local('Akzidenz-Grotesk BQ Bold Condensed'), local('Akzidenz-Grotesk-BQ-Bold-Condensed'),
+    url('../fonts/AkzidenzGroteskBQ-BdCnd.woff2') format('woff2'),
+    url('../fonts/AkzidenzGroteskBQ-BdCnd.woff') format('woff'),
+    url('../fonts/AkzidenzGroteskBQ-BdCnd.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+$fontFamily: "PT Sans";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #000000;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.container {
+    margin: 29px 0 0 0;
+}
+
+.header {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.header-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-top-lang {
+
+}
+
+.header-top-lang__item {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    font-size: 12px;
+    padding: 0 4px;
+    line-height: 19px;
+    font-weight: bold;
+    font-family: "Bebas Neue", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 10px 0 0;
+
+    &.active {
+        color: #ffffff;
+        background-color: #000000;
+        text-decoration: none;
+    }
+}
+
+.header-top__link {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: "Akzidenz-Grotesk BQ", sans-serif;
+    font-size: 15px;
+}
+
+.header-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: -10px 0 33px 0;
+    align-items: center;
+}
+
+.header-bottom__column {
+
+}
+
+.header-bottom-menu {
+
+}
+
+.header-bottom-menu-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    white-space: nowrap;
+
+    li {
+        margin: 0 45px 0 0;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+}
+
+.header-bottom-menu__link {
+    font-family: "Akzidenz-Grotesk BQ", sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.header-logo {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.header-logo__text {
+    display: block;
+    font-size: 10px;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 8px;
+}
+
+.header-logo__image {
+    display: inline-block;
+    margin: 13px 0 22px 0;
+}
+
+.slider {
+    background-color: #000000;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider__column {
+    width: 50%;
+    height: 425px;
+}
+
+.slider-image {
+    width: 100%;
+    height: 425px;
+}
+
+.slider-info {
+    color: #ffffff;
+    width: 100%;
+    height: 425px;
+}
+

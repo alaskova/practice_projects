@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+    <div class="buttons">
+        <button class="button1">Button 1</button>
+        <button class="button2">Button 2</button>
+        <button class="button3">Button 3</button>
+        <button class="button4">Button 4</button>
+    </div>
+
+    <script>
+        let promise = new Promise(resolve => {
+            let result = [];
+            document.querySelector('.buttons').addEventListener('click', (e) => {
+                if (!result.includes(e.target.innerText)) {
+                    result.push(e.target.innerText);
+                    if (result.length === 4) {
+                        resolve('Ура');
+                    }
+                }
+            });
+        });
+
+        promise.then((data) => {
+            console.log(data);
+        });
+    </script>
+</body>
+</html>
