@@ -13,6 +13,8 @@
     </div>
 
     <script>
+        // Buttons
+
         let promise = new Promise(resolve => {
             let result = [];
             document.querySelector('.buttons').addEventListener('click', (e) => {
@@ -27,6 +29,58 @@
 
         promise.then((data) => {
             console.log(data);
+        });
+
+        // Promise example
+
+        console.log('Data request...');
+
+        const req = new Promise(resolve => {
+            setTimeout(() => {
+                console.log('Preparing data...');
+
+                const product = {
+                    name: 'TV',
+                    price: 2000
+                };
+
+                resolve(product);
+            }, 2000);
+        });
+
+        req.then(product => {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    product.status = 'order';
+                    resolve(product);
+                }, 2000);
+            });
+        }).then((product) => {
+            product.modify = true;
+            return product;
+        }).then(product => {
+            console.log(product);
+        }).finally(() => {
+            console.log('Finally');
+        });
+
+        // All, race
+
+        const test = time => {
+            return new Promise(resolve => {
+                setTimeout(() => resolve(), time);
+            });
+        };
+
+        // test(1000).then(() => console.log('1000 ms'));
+        // test(2000).then(() => console.log('2000 ms'));
+
+        Promise.all([test(1000), test(2000)]).then(() => {
+            console.log('All'); // All ждет выполнения всех промисов и потом что-то делает
+        });
+
+        Promise.race([test(1000), test(2000)]).then(() => {
+            console.log('Race'); // Race выполняет свои действия, когда отработал самый первый промис
         });
     </script>
 </body>
