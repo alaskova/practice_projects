@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", (qualifiedName, value) => {
 
     // Tabs
 
@@ -198,34 +198,19 @@ window.addEventListener("DOMContentLoaded", () => {
         return await res.json();
     };
 
-    getResource('http://localhost:3000/menu')
+    // getResource('http://localhost:3000/menu')
+    //     .then(data => {
+    //         data.forEach(({img, altimg, title, descr, price}) => {
+    //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    //         });
+    //     });
+
+    axios.get('http://localhost:3000/menu')
         .then(data => {
-            data.forEach(({img, altimg, title, descr, price}) => {
+            data.data.forEach(({img, altimg, title, descr, price}) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
             });
         });
-
-    // getResource('http://localhost:3000/menu')
-    //     .then(data => createCard(data));
-    //
-    // function createCard(data) {
-    //     data.forEach(({img, altimg, title, descr, price}) => {
-    //         const element = document.createElement('div');
-    //         element.classList.add('menu__item');
-    //         element.innerHTML = `
-    //         <img src=${img} alt=${altimg}>
-    //             <h3 class="menu__item-subtitle">${title}</h3>
-    //             <div class="menu__item-descr">${descr}</div>
-    //             <div class="menu__item-divider"></div>
-    //             <div class="menu__item-price">
-    //                 <div class="menu__item-cost">Цена:</div>
-    //                 <div class="menu__item-total"><span>${price * 37}</span> грн/день</div>
-    //             </div>
-    //         `;
-    //
-    //         document.querySelector('.menu .container').append(element);
-    //     });
-    // }
 
     // Forms
 
@@ -309,7 +294,43 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     }
 
-    fetch('http://localhost:3000/menu')
-        .then(data => data.json())
-        .then(res => console.log(res));
+    // Slider
+
+    const slides = document.querySelectorAll('.offer__slide'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current'),
+        sliderCounter = document.querySelector('.offer__slider-counter');
+
+    let slideIndex = 0;
+
+    total.innerText = slides.length < 10 ? `0${slides.length}` : slides.length;
+    current.innerText = `0${slideIndex + 1}`;
+
+    slides.forEach((slide, index) => {
+        slideIndex === index ? slide.removeAttribute('hidden') : slide.setAttribute('hidden', 'true');
+    });
+
+    function showSlides() {
+        sliderCounter.addEventListener('click', (e) => {
+            if (e.target === next || e.target === document.querySelector('.offer__slider-next img')) {
+                slideIndex = slideIndex === slides.length - 1 ? 0 : slideIndex + 1;
+                showCurrentCounter();
+            }
+            if (e.target === prev || e.target === document.querySelector('.offer__slider-prev img')) {
+                slideIndex = slideIndex === 0 ? slides.length - 1 : slideIndex - 1;
+                showCurrentCounter();
+            }
+            slides.forEach((slide, index) => {
+                slideIndex === index ? slide.removeAttribute('hidden') : slide.setAttribute('hidden', 'true');
+            });
+        });
+    }
+
+    function showCurrentCounter() {
+        current.innerText = (slideIndex + 1) < 10 ? `0${slideIndex + 1}` : slideIndex + 1;
+    }
+
+    showSlides();
 });
